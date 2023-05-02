@@ -1,4 +1,5 @@
 #梯度下降算法
+# 11111111
 library("showtext")
 showtext.auto(enable = TRUE)
 #定义逻辑回归对数似然函数的一阶导数
