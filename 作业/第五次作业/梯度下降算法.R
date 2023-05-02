@@ -1,8 +1,4 @@
 #梯度下降算法
-# 11111111
-
-#22222222
-# 333333
 
 library("showtext")
 showtext.auto(enable = TRUE)
