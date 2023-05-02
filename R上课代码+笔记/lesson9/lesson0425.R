@@ -1,0 +1,89 @@
+#正太分布生成t分布随机数
+#Metropolis algorithm
+#target
+px=function(x){
+  out=(1+(x^2)/5)^(-3)
+  return(out)
+}
+x0=0
+outcome=c()
+times=c(0)
+all=c(x0)
+accrate=c()
+#迭代次数为11000，后续可以修改
+par(mfrow=c(3,2))
+#sigma=1
+sigma=1
+for(i in 1:110000){
+  x_new=rnorm(1,x0,sigma)
+  times=c(times,i)
+  d0=px(x0)
+  d_new=px(x_new)
+  a=min(1,d_new/d0)
+  accrate=c(accrate,a)
+  if(a==1){
+    x0=x_new
+  }else{
+    b=rbinom(1,1,d_new/d0)
+    if(b==1){
+      x0=x_new
+    }
+  }
+  all=c(all,x0)
+  if(i>=10000){
+    outcome=c(outcome,x0)
+  }
+}
+accept=mean(accrate)
+plot(times,all,type='l',xlab='times',ylab='X',main=paste('sigma=1','accrate=',signif(accept,3)))
+acf(all)
+#sigma=0.1
+sigma=0.1
+for(i in 1:110000){
+  x_new=rnorm(1,x0,sigma)
+  times=c(times,i)
+  d0=px(x0)
+  d_new=px(x_new)
+  a=min(1,d_new/d0)
+  accrate=c(accrate,a)
+  if(a==1){
+    x0=x_new
+  }else{
+    b=rbinom(1,1,d_new/d0)
+    if(b==1){
+      x0=x_new
+    }
+  }
+  all=c(all,x0)
+  if(i>=10000){
+    outcome=c(outcome,x0)
+  }
+}
+accept=mean(accrate)
+plot(times,all,type='l',xlab='times',ylab='X',main=paste('sigma=0.1','accrate=',signif(accept,3)))
+acf(all)
+#sigma=100
+sigma=100
+for(i in 1:110000){
+  x_new=rnorm(1,x0,sigma)
+  times=c(times,i)
+  d0=px(x0)
+  d_new=px(x_new)
+  a=min(1,d_new/d0)
+  accrate=c(accrate,a)
+  if(a==1){
+    x0=x_new
+  }else{
+    b=rbinom(1,1,d_new/d0)
+    if(b==1){
+      x0=x_new
+    }
+  }
+  all=c(all,x0)
+  if(i>=10000){
+    outcome=c(outcome,x0)
+  }
+}
+accept=mean(accrate)
+plot(times,all,type='l',xlab='times',ylab='X',main=paste('sigma=100','accrate=',signif(accept,3)))
+acf(all)

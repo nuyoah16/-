@@ -1,0 +1,46 @@
+ls()
+R
+x=seq(-10,10,0.01)#
+par(mfrow=c(5,3))#
+par(oma=c(3,3,3,3)) #
+par(mar=c(1.5,2,2.5,1.5)+0.1)#
+par(bty='l')#
+#正态分布#
+y11=dnorm(x)#
+plot(x,y11,type='l',main="Density")#
+y12=pnorm(x)#
+plot(x,y12,type='l',main='CDF')#
+y13=rnorm(1000)#
+hist(y13,main='Histogram of random numbers',xlim=c(-4,4))#
+#t分布#
+y21=dt(x,df=30)#
+plot(x,y21,type='l')#
+text(-5,0.2,'df=30')#
+y22=pt(x,df=30)#
+plot(x,y22,type='l')#
+text(-5,0.6,'df=30')#
+y23=rt(1000,df=30)#
+hist(y23,xlab='y23(df=30)',main=NULL,xlim=c(-4,4))#
+#指数分布#
+y31=dexp(x)#
+plot(x,y31,type='l')#
+y32=pexp(x)#
+plot(x,y32,type='l')#
+y33=rexp(1000)#
+hist(y33,main=NULL,xlim=c(0,10))#
+#poisson分布#
+y41=dpois(x,lambda = 3)#
+plot(x,y41,type='l')#
+text(-5,0.15,'lambda=3')#
+y42=ppois(x,lambda = 3)#
+plot(x,y42,type='l')#
+text(-5,0.6,'lambda=3')#
+y43=rpois(1000,lambda = 3)#
+hist(y43,main=NULL,xlim=c(0,10))#
+#均匀分布#
+y51=dunif(x)#
+plot(x,y51,type='l',ylab='y51 of Uniform')#
+y52=punif(x)#
+plot(x,y52,type='l',ylab='y52 of Uniform')#
+y53=runif(1000)#
+hist(y53,ylab='Frequency of Uniform',main=NULL)

@@ -1,0 +1,25 @@
+sigma=80
+par(mfrow=c(1,2))
+for(i in 1:110000){
+  x_new=rnorm(1,x0,sigma)
+  times=c(times,i)
+  d0=px(x0)
+  d_new=px(x_new)
+  a=min(1,d_new/d0)
+  accrate=c(accrate,a)
+  if(a==1){
+    x0=x_new
+  }else{
+    b=rbinom(1,1,d_new/d0)
+    if(b==1){
+      x0=x_new
+    }
+  }
+  all=c(all,x0)
+  if(i>=10000){
+    outcome=c(outcome,x0)
+  }
+}
+accept=mean(accrate)
+plot(times,all,type='l',xlab='times',ylab='X',main=paste('sigma=80','accrate=',signif(accept,3)))
+acf(all)

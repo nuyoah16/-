@@ -1,0 +1,9 @@
+mysummary=function(x){
+  mean_1=mean(x)
+  variance_1=var(x)
+  length_1=length(x)
+  max_1=max(x)
+  min_1=min(x)
+  type_1=typeof(x)
+  return(list(mean=mean_1,variance=variance_1,length=length_1,max=max_1,min=min_1,type=type_1))
+}

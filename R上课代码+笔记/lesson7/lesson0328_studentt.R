@@ -1,0 +1,23 @@
+#利用正态分布随机数生成t分布随机数
+n=1000
+m=0.95#先设出m的值，后续再进行调整
+u=runif(n)
+v=rnorm(n)
+y=matrix(0,1,n)
+accp=0
+for(i in 1:n){
+  temp=(1/m)*dt(v[i],df=5)/dnorm(v[i])
+  if(u[i]<temp){
+    y[i]=v[i]
+    accp=accp+1
+  }
+}
+percentage=accp/n
+print(percentage)
+#绘图比较（利用rt生成的随机数感觉和正态分布筛选生成的不太一样？）
+a=rt(n,df=5)
+par(mfrow=c(1,2))
+xlim=c(-6,6)
+ylim=c(0,450)
+hist(a,xlim=xlim,ylim=ylim)
+hist(y,xlim=xlim,ylim=ylim)

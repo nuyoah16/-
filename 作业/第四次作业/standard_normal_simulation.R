@@ -1,0 +1,35 @@
+#N(0,1)生成0.3N(0,1)+0.7N(2,2)
+#当m和acceptrate冲突时优先哪个？
+mix=function(x){
+  out=0.3*dnorm(x)+0.7*dnorm(x,mean=2,sd=2)
+  return(out)
+}
+#绘制概率密度曲线
+x=seq(-0.75,0.75,0.01)
+f=mix(x)
+f1=dnorm(x)
+par(mfrow=c(3,1))
+plot(x,f,type='l',lwd=3,col='red',ylim=c(0,max(f,f1)))
+lines(x,f1,lwd=3,col='black')
+#确定m的取值
+m0=f/f1
+m=max(m0)
+plot(x,f,type='l',lwd=3,col='red',ylim=c(0,max(f,m*f1)))
+lines(x,m*f1,lwd=3,col='black')
+#生成随机数
+n=10000
+u=runif(n)
+v=rnorm(n)
+y=matrix(0,1,n)
+accp=0
+for(i in 1:n){
+  temp=(1/m)*mix(v[i])/dnorm(v[i])
+  if(u[i]<temp){
+    y[i]=v[i]
+    accp=accp+1
+  }
+}
+percentage=accp/n
+print(percentage)
+#print(v)
+hist(y)

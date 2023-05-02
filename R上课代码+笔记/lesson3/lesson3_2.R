@@ -1,0 +1,18 @@
+#貌似是个不正确的东西
+quaroot=function(a,b,c){
+  if(any(is.numeric(c(a,b,c)))==FALSE){
+   return('输入错误') 
+  }else{
+    if(a==0|(b^2-4*a*c)<0){
+      return('输入错误')
+    }else{
+      x1=(-b+sqrt(b^2-4*a*c))/2*a
+      x2=(-b-sqrt(b^2-4*a*c))/2*a
+      if(x1==x2){
+        return(x1)
+      }else{
+        return(list(x_1=x1,x_2=x2))
+      }
+    } 
+  }
+}
